@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Offline file uploads using File API</title>
+	<style>
+		@import url('./style.css');
+	</style>
+</head>
+<body>
+<div>
+<form method="post" action="./upload.html" enctype="multipart/form-data" target="upload-target" class="button disabled">
+	<span>Upload a file</span>
+	<input type="file" name="files" multiple disabled />
+	<button type="submit" disabled>Upload a file</button>
+</form>
+<iframe name="upload-target" style="display: none;"></iframe>
+<span id="memo" class="memo"></span>
+</div>
+
+<ul id="log" class="log"></ul>
+
+<script src="../src/offline-uploader.js"></script>
+<script>
+(function () {
+
+	var log_el = document.getElementById('log');
+	var form_el = document.getElementsByTagName('form')[0];
+	var memo_el = document.getElementById('memo');
+
+	var log = function (message) {
+		var item = document.createElement('li');
+		item.innerHTML = message;
+		log_el.appendChild(item);
+		log_el.scrollTop = log_el.scrollHeight;
+	};
+
+	var addUploaderLogging = function (uploader) {
+		uploader.on('queuesuccess', function (name) {
+			log('The file <strong>' + name + '</strong> was added to the queue.');
+		});
+		uploader.on('queuefailure', function (name) {
+			log('An error occurred while adding the file <strong>' + name + '</strong> to the queue.');
+		});
+		uploader.on('queueempty', function () {
+			log('The queue is empty');
+		});
+		uploader.on('uploading', function (name) {
+			log('The file <strong>' + name + '</strong> is being uploaded.');
+		});
+		uploader.on('uploadsuccess', function (name) {
+			log('The file <strong>' + name + '</strong> was successfully uploaded.');
+		});
+		uploader.on('uploadfailure', function (name) {
+			log('An error occurred while uploading the file <strong>' + name + '</strong>.');
+		});
+		uploader.on('dragenter', function () {
+			log_el.className += ' drop-target';
+		});
+		uploader.on('dragleave', function () {
+			log_el.className = log_el.className.replace(' drop-target', '');
+		})
+		uploader.on('drop', function (files) {
+			log('<strong>' + files.length + ' file(s)</strong> were dragged and dropped.');
+			log_el.className = log_el.className.replace(' drop-target', '');
+			memo_el.innerHTML = '';
+		});
+	};
+
+	var uploader = new OfflineUploader(form_el, {
+		api: './upload-base64.json',
+		drop: log_el
+	});
+	addUploaderLogging(uploader);
+	window.uploader = uploader;
+	uploader.init();
+
+}());
+</script>
+</body>
+</html>

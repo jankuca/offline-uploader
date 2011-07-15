@@ -1,0 +1,137 @@
+body {
+	margin: 20px;
+	font-family: sans-serif;
+}
+
+.button {
+	float: left;
+	display: inline;
+	position: relative;
+	height: 20px;
+	line-height: 20px;
+	padding: 5px 10px 5px 30px;
+	overflow: hidden;
+	overflow: visible\9; /* weird IE bug, icon not visible otherwise */
+	border: 1px solid #AAA;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border-radius: 4px\9; /* IE made only 2px radius otherwise */
+	background-color: #E5E5E5;
+	background-image: -moz-linear-gradient(top, #EEE, #DDD);
+	background-image: -webkit-linear-gradient(top, #EEE, #DDD);
+	background-image: linear-gradient(top, #EEE, #DDD);
+	-moz-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgb(255, 255, 255) 0 1px 0 inset;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgb(255, 255, 255) 0 1px 0 inset;
+	box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgb(255, 255, 255) 0 1px 0 inset;
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.button::before {
+	position: absolute;
+	top: 0;
+	left: 8px;
+	right: 0;
+	bottom: 2px;
+	width: 16px;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAkRJREFUeNqMUztoU1EY/u4rubYkkkZStQhFiRkyyR0SUTv4oBkUDQ4OgqCLg5PZ3TI4uQmaRdBuji4l9QGlNhpIh0IWC9oGk0g0uTblPnNvruePaclL8IfvnsP/+M7/upzneSA5fuUBDp+/C3l6GrIsQ2IQRHGBbK7jrHZMEyZB07C79gK1lae9OB59CZy9gyHxvBQLfEKg+6Bp0FfEBGFZpTqWlb19dV6xbQ+v8zvZfqbLo778pGCLBd+8fEKpVg1UKjoWk8cU0nkjmYwR9IJ1PXsrdYq97ELTdNRqdYafOHNSVsg2SnJQgmPbRJCmVJ+/LJRId30xpnRcBytrX0v7fhzHpRmWJ/aABd/vui663S4Rfmw5vLkrydR5S/T5zvE8D14QiGQ8g6PNT9g7NIcmwtDbbVJt1TlZqMsCEXxh9WAqGES48wMBo8rMF4YJZpsFzIkiWtwRrCNJqo0qP9Vo+D1YhvGdFIrxATPeLziO8+8xkkPSW8dqR9lUPbGiCaw/lvV7QSphhmuNjXyQIMB6cI3OMCskLeWBXP6vRcIs+8b6S7vH8KZ/DkzBcW5kMplHwWAwapoGDENnMJnepd73WAAfdF3fWlp6xvLCqyECZgglEokoTYAIaO/Z8gwQiFBVDYFAKJrL6aGxEjRNk1RVRaFQQLlchm1bDDYbKXovA36oj3dw7/PDnu8YQbvd9heLxe14PD4fi53uZWFZ9lAGxlsXm982tsn3YLH2f+dIJHLRdd1L+A8RBOFdo9F4T/c/AgwAXLc7LqxzK4oAAAAASUVORK5CYII=');
+	background-position: left center;
+	background-repeat: no-repeat;
+	content: '';
+}
+.button:hover {
+	background-color: #F5F5F5;
+	background-image: -moz-linear-gradient(top, #F5F5F5, #E5E5E5);
+	background-image: -webkit-linear-gradient(top, #F5F5F5, #E5E5E5);
+	background-image: linear-gradient(top, #F5F5F5, #E5E5E5);
+	color: #444;
+}
+.disabled, .disabled:hover {
+	border-color: #CCC;
+	background-color: #E5E5E5;
+	background-image: -moz-linear-gradient(top, #EEE, #DDD);
+	background-image: -webkit-linear-gradient(top, #EEE, #DDD);
+	background-image: linear-gradient(top, #EEE, #DDD);
+	-moz-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+	box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px, rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+	color: #AAA;
+}
+.disabled::before {
+	opacity: 0.5;
+}
+.button input {
+	display: none\9;
+	position: absolute;
+	top: 100%;
+	left: -1px;
+	bottom: -1px;
+	right: -1px;
+	height: 32px;
+	opacity: 0;
+}
+.button button {
+	display: none;
+	display: inline\9;
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	bottom: -1px;
+	right: -1px;
+	opacity: 0;
+}
+.disabled button {
+	display: none;
+}
+
+.drop-target {
+	box-shadow: #7F5 0 1px 10px;
+}
+
+.log {
+	clear: left;
+	position: relative;
+	top: 10px;
+	margin: 10px 0;
+	width: 600px;
+	height: 200px;
+	overflow-y: scroll;
+	padding: 0;
+	border: 1px solid #AAA;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border-radius: 4px\9;
+	background-color: #EEE;
+	color: #666;
+	font-family: monospace;
+	font-size: 11px;
+	list-style: none;
+}
+.log::-webkit-scrollbar {
+	width: 8px;
+	background: transparent;
+}
+.log::-webkit-scrollbar-thumb {
+	width: 8px;
+	border-radius: 4px;
+	background: #DDD;
+	background-image: -webkit-linear-gradient(top, #DDD, #D5D5D5);
+	box-shadow: #FFF 0 1px 0 inset;
+}
+.log li {
+	padding: 4px 10px;
+	border-bottom: 1px solid #DDD;
+	background-color: #F5F5F5;
+}
+.log li:last-child {
+	margin-bottom: 10px;
+}
+.log strong {
+	color: #222;
+	background-color: #FFC;
+}
