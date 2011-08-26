@@ -300,6 +300,9 @@
 		this.label('Upload a file');
 		this['enable']();
 
+		try {
+			data = JSON.parse(data);
+		} catch (err) {}
 		this.fire('uploadsuccess', data);
 	};
 
